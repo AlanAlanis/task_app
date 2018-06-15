@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewTaskFormActivity">
+
+    <Button
+        android:id="@+id/ButtonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="24dp"
+        android:onClick="CancelNewTask"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ButtonSave"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/ButtonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="SaveNewTask"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ButtonCancel" />
+
+    <Switch
+        android:id="@+id/SwitchDone"
+        android:layout_width="250dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditTextLongDescription" />
+
+    <SeekBar
+        android:id="@+id/SeekbarPercentage"
+        android:layout_width="130dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="52dp"
+        android:max="100"
+        app:layout_constraintEnd_toEndOf="@+id/SwitchDone"
+        app:layout_constraintTop_toBottomOf="@+id/SwitchDone" />
+
+    <EditText
+        android:id="@+id/EditTextShortDescription"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/shortdescription"
+        android:inputType="text|textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/EditTextLongDescription"
+        android:layout_width="250dp"
+        android:layout_height="148dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/longdescription"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditTextShortDescription" />
+
+    <TextView
+        android:id="@+id/TextViewLabelPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="@string/percentage"
+        app:layout_constraintStart_toStartOf="@+id/SwitchDone"
+        app:layout_constraintTop_toBottomOf="@+id/SwitchDone" />
+
+    <TextView
+        android:id="@+id/TextViewPercentage"
+        android:layout_width="72dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="12dp"
+        android:text="default"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/SeekbarPercentage"
+        app:layout_constraintTop_toBottomOf="@+id/SeekbarPercentage" />
+
+
+</android.support.constraint.ConstraintLayout>

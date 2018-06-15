@@ -5,4 +5,11 @@
     <string name="TaskDoing">Task Doing</string>
     <string name="New">New</string>
     <string name="ShowAll">SHOW ALL</string>
+    <string name="done">Done</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="longdescription">LongDescription</string>
+    <string name="shortdescription">ShortDescription</string>
+    <string name="intpercentage">intPercentage</string>
+    <string name="percentage">Percentage</string>
 </resources>
