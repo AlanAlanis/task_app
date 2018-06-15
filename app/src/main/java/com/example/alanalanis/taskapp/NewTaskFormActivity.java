@@ -201,7 +201,7 @@ public class NewTaskFormActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             List<Task> listOfTask = DBUtil.getTasks();
             for (Task task: listOfTask){
-                Log.d( "InDataBase - Tasks: ", "ShortDescription: " +task.getShortDescription() + ", Percentage: " +
+                Log.d( "***InDataBase - Tasks:**** ", "ShortDescription: " +task.getShortDescription() + ", Percentage: " +
                         String.valueOf(task.getPercentage()));
             }
         }
