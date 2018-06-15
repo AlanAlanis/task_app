@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">taskapp</string>
+    <string name="TaskToDo">Task To Do</string>
+    <string name="summary">Summary</string>
+    <string name="TaskDoing">Task Doing</string>
+    <string name="New">New</string>
+    <string name="ShowAll">SHOW ALL</string>
+</resources>
