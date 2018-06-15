@@ -1,6 +1,9 @@
 package com.example.alanalanis.taskapp;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +13,11 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class NewTaskFormActivity extends AppCompatActivity {
+
+    BroadcastReceiver showTaskReceiver = new ShowTaskReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +30,31 @@ public class NewTaskFormActivity extends AppCompatActivity {
         initiateTheSwitchDone();
         addListenerToTheSwitchDone();
 
+    }
+
+    @Override
+    protected  void onStart(){
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksReady");
+        this.registerReceiver(this.showTaskReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBGetAllTask(taskDBInstance,getApplicationContext());
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        TaskDB.destroyInstance();
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        this.unregisterReceiver(this.showTaskReceiver);
     }
 
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - - - - - - - - - - -- - - - - -
@@ -120,14 +152,36 @@ public class NewTaskFormActivity extends AppCompatActivity {
 
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     public void SaveNewTask(
-            //                                              //Back to main activity.
+            //                                              //Crate a new task.
 
             //                                              //View
             View view
     ) {
 
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+        Task task = new Task();
+
+        TextView editTextShortDescription = findViewById(R.id.EditTextShortDescription);
+        String strShortDescription = editTextShortDescription.getText().toString();
+        task.setShortDescription(strShortDescription);
+
+        TextView editTextLongDescription = findViewById(R.id.EditTextLongDescription);
+        String strTextLongDescription = editTextLongDescription.getText().toString();
+        task.setLongDescription(strTextLongDescription);
+
+        Switch switchDone = findViewById(R.id.SwitchDone);
+        if (switchDone.isChecked())
+            task.setPercentage(100);
+        else{
+            SeekBar seekbarPercentage = findViewById(R.id.SeekbarPercentage);
+            task.setPercentage(seekbarPercentage.getProgress());
+        }
+
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBSaveNewTask(taskDBInstance, task);
+
+        Log.d("New Task",task.getShortDescription() + ", " + task.getLongDescription() + ", " + task.getPercentage());
+
+        this.showTaskReceiver.onReceive(getApplicationContext(),this.getIntent());
     }
 
 
@@ -142,7 +196,15 @@ public class NewTaskFormActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
-
+    private class ShowTaskReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            List<Task> listOfTask = DBUtil.getTasks();
+            for (Task task: listOfTask){
+                Log.d( "InDataBase - Tasks: ", "ShortDescription: " +task.getShortDescription() + ", Percentage: " +
+                        String.valueOf(task.getPercentage()));
+            }
+        }
+    }
 }
+

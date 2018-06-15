@@ -8,8 +8,8 @@
     <string name="done">Done</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="longdescription">LongDescription</string>
-    <string name="shortdescription">ShortDescription</string>
+    <string name="longdescription">Long description</string>
+    <string name="shortdescription">Short description</string>
     <string name="intpercentage">intPercentage</string>
     <string name="percentage">Percentage</string>
 </resources>

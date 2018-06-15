@@ -1,11 +1,36 @@
 package com.example.alanalanis.taskapp;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
+@Entity
 public class Task {
+
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @ColumnInfo(name = "shortDescription")
     private String shortDescription;
+
+    @ColumnInfo(name = "longDescription")
     private String longDescription;
+
+    @ColumnInfo(name = "percentage")
     private int percentage;
 
+    //                                                      //Constructors
+    public Task(){
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getShortDescription() {
         return shortDescription;
     }
