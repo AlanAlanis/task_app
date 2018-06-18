@@ -50,7 +50,7 @@ public class DBUtil {
     }
 
     public static void DBGetDoingTask(TaskDB taskDBInstance, Context context){
-        GetDoingTask getDoingTask = new GetDoingTask(taskDBInstance, context);
+        GetDoingTask getDoingTask = new GetDoingTask(taskDBInstance,context);
         getDoingTask.execute();
     }
 
@@ -58,6 +58,8 @@ public class DBUtil {
         GetDoneTask getDoneTask = new GetDoneTask(taskDBInstance, context);
         getDoneTask.execute();
     }
+
+
 
     //-----------------------------------------------------------------------------------------------------------------
     private static class GetAllTask extends AsyncTask<Void, Void, Void> {
@@ -72,19 +74,19 @@ public class DBUtil {
         @Override
         protected Void doInBackground(final Void... params) {
             tasks = taskDBInstance.taskDAO().getAll();
-            Log.d("LGF ", tasks.size() + " Tasks in DB");
             return null;
         }
 
         @Override
         protected void onPostExecute(Void v)
         {
-            Log.d("LGF Broadcast ", "TasksReady");
             Intent intent = new Intent();
             intent.setAction("com.LGF.CUSTOM_INTENT.TasksReady");
             context.sendBroadcast(intent);
         }
     }
+
+
 
     //-----------------------------------------------------------------------------------------------------------------
     private static class SaveNewTask extends AsyncTask<Void, Void, Void> {
@@ -103,6 +105,7 @@ public class DBUtil {
             return null;
         }
     }
+
 
     //-----------------------------------------------------------------------------------------------------------------
     private static class TaskCount extends AsyncTask<Void, Void, Void> {
@@ -125,7 +128,6 @@ public class DBUtil {
         @Override
         protected void onPostExecute(Void v)
         {
-            Log.d("LGF Broadcast ", "TasksCountReady");
             Intent intent = new Intent();
             intent.setAction("com.LGF.CUSTOM_INTENT.TasksCountReady");
             context.sendBroadcast(intent);
@@ -152,7 +154,6 @@ public class DBUtil {
         @Override
         protected void onPostExecute(Void v)
         {
-            Log.d("LGF Broadcast ", "TasksReady");
             Intent intent = new Intent();
             intent.setAction("com.LGF.CUSTOM_INTENT.TasksReady");
             context.sendBroadcast(intent);
@@ -173,14 +174,12 @@ public class DBUtil {
         protected Void doInBackground(final Void... params) {
             tasks = taskDBInstance.taskDAO().getDoing();
             DoingTaskCount = tasks.size();
-            Log.d("DoingTaskCount", "" + DoingTaskCount);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void v)
         {
-            Log.d("LGF Broadcast ", "TasksReady");
             Intent intent = new Intent();
             intent.setAction("com.LGF.CUSTOM_INTENT.TasksReady");
             context.sendBroadcast(intent);
@@ -192,7 +191,7 @@ public class DBUtil {
         TaskDB taskDBInstance;
         Context context;
 
-        public GetDoneTask(TaskDB taskDBInstance, Context context) {
+        public  GetDoneTask(TaskDB taskDBInstance, Context context){
             this.taskDBInstance = taskDBInstance;
             this.context = context;
         }
@@ -201,14 +200,11 @@ public class DBUtil {
         protected Void doInBackground(final Void... params) {
             tasks = taskDBInstance.taskDAO().getDone();
             DoneTaskCount = tasks.size();
-            Log.d("DoneTaskCount", "" + DoneTaskCount);
             return null;
         }
-
         @Override
         protected void onPostExecute(Void v)
         {
-            Log.d("LGF Broadcast ", "TasksReady");
             Intent intent = new Intent();
             intent.setAction("com.LGF.CUSTOM_INTENT.TasksReady");
             context.sendBroadcast(intent);

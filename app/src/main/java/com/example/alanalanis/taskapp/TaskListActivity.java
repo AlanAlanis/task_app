@@ -86,6 +86,7 @@ public class TaskListActivity extends AppCompatActivity {
         DBUtil.DBGetToDoTask(taskDBInstance, getApplicationContext());
     }
 
+    //-----------------------------------------------------------------------------------------------------------------
     public void ShowAllTask(
             //                                              //
 
@@ -96,5 +97,29 @@ public class TaskListActivity extends AppCompatActivity {
         DBUtil.DBGetAllTask(taskDBInstance,getApplicationContext());
     }
 
+    public void ShowDoingTaskForm(
+            //                                              //
+
+            //                                              //
+            View view
+    ){
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBGetDoingTask(taskDBInstance, getApplicationContext());
+    }
+
+
+    public void ShowDoneTaskForm(
+            //                                              //
+
+            //                                              //
+            View view
+    ){
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBGetDoneTask(taskDBInstance, getApplicationContext());
+    }
+
+    public void BackToMainActivity(View view){
+        finish();
+    }
 
 }

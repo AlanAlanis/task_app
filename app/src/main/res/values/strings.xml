@@ -12,4 +12,7 @@
     <string name="shortdescription">Short description</string>
     <string name="intpercentage">intPercentage</string>
     <string name="percentage">Percentage</string>
+    <string name="TaskList">TaskList</string>
+    <string name="TaskDetail">TaskDetail</string>
+    <string name="TaskDone">Task Done</string>
 </resources>

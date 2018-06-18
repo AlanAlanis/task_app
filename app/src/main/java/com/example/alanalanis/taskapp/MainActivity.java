@@ -1,14 +1,23 @@
 package com.example.alanalanis.taskapp;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     final static String tag = "AIAA";
+
+    BroadcastReceiver showTaskReceiver = new ShowTaskReceiver();
+    BroadcastReceiver updateTaskCountReceiver = new UpdateTaskCountReceiver();
 
     @Override
     protected void onCreate(
@@ -19,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(tag,"The onCreate() event");
+
     }
 
     @Override
@@ -27,45 +36,33 @@ public class MainActivity extends AppCompatActivity {
             //                                              //Este metodo se ejecuta al iniciar la actividad
     ){
         super.onStart();
-        Log.d(tag,"The onStart() event");
+        IntentFilter intentTaskReady = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksReady");
+        this.registerReceiver(this.showTaskReceiver, intentTaskReady);
+        IntentFilter intentTaskCountReady = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksCountReady");
+        this.registerReceiver(updateTaskCountReceiver, intentTaskCountReady);
     }
 
-    //- - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @Override
-    protected void onResume(
-            //                                              //
-    ){
+    protected void onResume(){
         super.onResume();
-        Log.d(tag,"The onResume() event");
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+
+        DBUtil.DBGetAllTask(taskDBInstance,getApplicationContext());
+
+        DBUtil.DBTaskCount(taskDBInstance,getApplicationContext());
     }
 
-    //- - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @Override
-    protected void onPause(
-            //                                              //
-    ){
-        super.onPause();
-        Log.d(tag,"The onPause() event");
-
-    }
-
-    //- - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    @Override
-    protected  void onStop(
-            //                                              //
-    ){
-        super.onStop();
-        Log.d(tag,"The onStop() event");
-    }
-
-    //- - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    @Override
-    protected  void onDestroy(
-            //                                              //
-    ){
+    public void onDestroy(){
         super.onDestroy();
-        Log.d(tag,"The onDestroy() event");
+        TaskDB.destroyInstance();
     }
+    @Override
+    public void onPause(){
+        super.onPause();
+        this.unregisterReceiver(this.showTaskReceiver);
+    }
+
 
     public void ShowNewTaskForm(
             //                                              //Abre la actividad NewTaskForm
@@ -96,5 +93,47 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
+    public void FinishApp(
+            //                                              //Cierra la aplicacion
+
+            //                                              //vista
+            View view){
+        finish();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    private class ShowTaskReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            List<Task> listOfTask = DBUtil.getTasks();
+            for (Task task: listOfTask){
+                Log.d("AIAA - Tasks ", task.getShortDescription() + ", " +
+                        String.valueOf(task.getPercentage()));
+            }
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    private class UpdateTaskCountReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            int intToDoTask = DBUtil.getToDoTaskCount();
+            TextView textViewTaskToDo = findViewById(R.id.TextViewTaskToDoCount);
+            textViewTaskToDo.setText(String.valueOf(intToDoTask) + " Task To Do");
+
+            int intDoingTask = DBUtil.getDoingTaskCount();
+            TextView textViewTaskDoing = findViewById(R.id.TextViewTaskDoingCount);
+            textViewTaskDoing.setText(String.valueOf(intDoingTask) + " Task Doing");
+
+            int intDoneTask = DBUtil.getDoneTaskCount();
+            TextView textViewTaskDone = findViewById(R.id.TextViewTaskDoneCount);
+            textViewTaskDone.setText(String.valueOf(intDoneTask) + " Task Done ");
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------
 
 }

@@ -30,7 +30,6 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/TextViewTaskDoingCount"
         app:layout_constraintTop_toBottomOf="@+id/TextViewSummary" />
-
     <TextView
         android:id="@+id/TextViewTaskDoingCount"
         android:layout_width="wrap_content"
@@ -45,10 +44,10 @@
 
     <TextView
         android:id="@+id/TextViewTaskDoneCount"
-        android:layout_width="123dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/TaskToDo"
+        android:text="@string/TaskDone"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textSize="24sp"
@@ -80,5 +79,22 @@
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/ToolbarMain"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="?attr/actionBarSize"
+        android:onClick="FinishApp"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+        app:title="@string/app_name"
+        app:titleTextColor="@android:color/white" />
 
 </android.support.constraint.ConstraintLayout>

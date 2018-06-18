@@ -36,7 +36,7 @@
         android:id="@+id/SwitchDone"
         android:layout_width="250dp"
         android:layout_height="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
         android:id="@+id/SeekbarPercentage"
         android:layout_width="130dp"
         android:layout_height="16dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="32dp"
         android:max="100"
         app:layout_constraintEnd_toEndOf="@+id/SwitchDone"
         app:layout_constraintTop_toBottomOf="@+id/SwitchDone" />
@@ -55,7 +55,7 @@
         android:id="@+id/EditTextShortDescription"
         android:layout_width="250dp"
         android:layout_height="48dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="76dp"
         android:ems="10"
         android:hint="@string/shortdescription"
         android:inputType="text|textPersonName"
@@ -67,7 +67,7 @@
         android:id="@+id/EditTextLongDescription"
         android:layout_width="250dp"
         android:layout_height="148dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/longdescription"
         android:inputType="textMultiLine"
@@ -79,7 +79,7 @@
         android:id="@+id/TextViewLabelPercentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="44dp"
         android:text="@string/percentage"
         app:layout_constraintStart_toStartOf="@+id/SwitchDone"
         app:layout_constraintTop_toBottomOf="@+id/SwitchDone" />
@@ -88,11 +88,26 @@
         android:id="@+id/TextViewPercentage"
         android:layout_width="72dp"
         android:layout_height="38dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:textSize="24sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/SeekbarPercentage"
         app:layout_constraintTop_toBottomOf="@+id/SeekbarPercentage" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/ToolbarNewTaskForm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:onClick="BackToMainActivity"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+        app:title="@string/TaskDetail"
+        app:titleTextColor="@android:color/white" />
 
 
 </android.support.constraint.ConstraintLayout>

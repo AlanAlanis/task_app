@@ -181,7 +181,7 @@ public class NewTaskFormActivity extends AppCompatActivity {
 
         Log.d("New Task",task.getShortDescription() + ", " + task.getLongDescription() + ", " + task.getPercentage());
 
-        this.showTaskReceiver.onReceive(getApplicationContext(),this.getIntent());
+        finish();
     }
 
 
@@ -205,6 +205,10 @@ public class NewTaskFormActivity extends AppCompatActivity {
                         String.valueOf(task.getPercentage()));
             }
         }
+    }
+
+    public  void BackToMainActivity(View view){
+        finish();
     }
 }
 

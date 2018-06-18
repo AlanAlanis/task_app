@@ -59,7 +59,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycletViewTasks"
         android:layout_width="300dp"
-        android:layout_height="480dp"
+        android:layout_height="404dp"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="42dp"
         android:layout_marginStart="42dp"
@@ -68,6 +68,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/ToolbarTaskList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:onClick="BackToMainActivity"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+        app:title="@string/TaskList"
+        app:titleTextColor="@android:color/white" />
 
 
 </android.support.constraint.ConstraintLayout>
