@@ -133,7 +133,6 @@ public class DBUtil {
     }
 
     //-----------------------------------------------------------------------------------------------------------------
-
     private static class GetToDoTask extends AsyncTask<Void, Void, Void> {
         TaskDB taskDBInstance;
         Context context;
@@ -147,7 +146,6 @@ public class DBUtil {
         protected Void doInBackground(final Void... params) {
             tasks = taskDBInstance.taskDAO().getToDo();
             ToDoTaskCount = tasks.size();
-            Log.d("ToDoTaskCount", "" + ToDoTaskCount);
             return null;
         }
 

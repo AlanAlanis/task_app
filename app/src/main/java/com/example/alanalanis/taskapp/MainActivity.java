@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(
             //                                              //Este metodo se ejecuta al iniciar la actividad y carga la vista
 
-            //                                              //
+            //                                              //Bundle
             Bundle savedInstanceState
     ) {
         super.onCreate(savedInstanceState);
@@ -77,6 +77,21 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(
                 getApplicationContext(), NewTaskFormActivity.class
+        );
+        startActivity(intent);
+
+    }
+
+    public void ShowAll(
+            //                                              //Abre la actividad TaskListActivity
+
+            //                                              //Vista
+            View view
+    )
+    {
+
+        Intent intent = new Intent(
+                getApplicationContext(), TaskListActivity.class
         );
         startActivity(intent);
 
